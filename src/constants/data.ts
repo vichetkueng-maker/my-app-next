@@ -3,7 +3,7 @@ import { NavItem } from '@/types';//Info: The following data is used for the sid
 export const navItems: NavItem[] = [
   {
     title: 'Dashboard',
-    url: '/dashboard/overview',
+    url: '/',
     icon: 'dashboard',
     isActive: false,
     shortcut: ['d', 'd'],

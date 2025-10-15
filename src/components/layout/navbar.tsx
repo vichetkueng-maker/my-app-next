@@ -91,11 +91,15 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-2">
           <div className="flex h-6 w-6 items-center justify-center">
-            <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-foreground">
+            {/* <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-foreground">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg> */}
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M20 21a8 8 0 1 0-16 0"/>
             </svg>
           </div>
-          <span className="font-sans text-sm font-semibold text-foreground">NEXT.js</span>
+          <span className="font-sans text-sm font-semibold text-foreground">Kuengvichet</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -142,9 +146,7 @@ export function Navbar() {
 
           {/* Deploy Button - Hidden on small screens */}
           <Button size="sm" className="text-sm bg-cyan-400">
-            {/* <svg viewBox="0 0 24 24" fill="currentColor" className="mr-2 h-4 w-4">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg> */}
+           
             <Link href="/login" className="hidden text-sm sm:inline-flex">
               Login
             </Link>
@@ -187,39 +189,7 @@ export function Navbar() {
             >
               Showcase
             </Link>
-            {/* <div className="space-y-1">
-              <div className="px-3 py-2 text-sm font-medium text-foreground">Docs</div>
-              <Link
-                href="/docs/getting-started"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                Getting Started
-              </Link>
-              <Link
-                href="/docs/installation"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                Installation
-              </Link>
-              <Link
-                href="/docs/api-reference"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                API Reference
-              </Link>
-              <Link
-                href="/docs/components"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                Components
-              </Link>
-              <Link
-                href="/docs/examples"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                Examples
-              </Link>
-            </div> */}
+            
             <NavDropdown trigger="Docs" items={docsItems} />
             <Link
               href="/blog"
@@ -227,39 +197,7 @@ export function Navbar() {
             >
               Blog
             </Link>
-            {/* <div className="space-y-1">
-              <div className="px-3 py-2 text-sm font-medium text-foreground">Templates</div>
-              <Link
-                href="/templates/ecommerce"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                E-commerce
-              </Link>
-              <Link
-                href="/templates/blog"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                Blog
-              </Link>
-              <Link
-                href="/templates/dashboard"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                Dashboard
-              </Link>
-              <Link
-                href="/templates/landing"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                Landing Page
-              </Link>
-              <Link
-                href="/templates/saas"
-                className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                SaaS
-              </Link>
-            </div> */}
+            
             <NavDropdown trigger="Templates" items={templateItems} />
             <Link
               href="/enterprise"
