@@ -5,6 +5,7 @@ import Dashboard from '@/components/layout/section/dashboard';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
+import UseDataTable from '../feature/dataTable/use-datatable';
 
 export const metadata: Metadata = {
   title: 'Next Shadcn Dashboard Starter',
@@ -26,6 +27,7 @@ export default async function DashboardLayout({
         <SidebarInset>
           <Header />
           <Dashboard></Dashboard>
+          <UseDataTable></UseDataTable>
           {/* page main content */}
           {children}
           {/* page main content ends */}

@@ -8,51 +8,93 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useRouter } from "next/navigation"
+import {useForm} from "react-hook-form"
+import * as z from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 export function LoginForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+// type LoginRequest = {
+//   username : string;
+//   password : string;
+// }
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   setIsLoading(true)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
+  //   // Simulate API call
+  //   await new Promise((resolve) => setTimeout(resolve, 1000))
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
-    console.log("[v0] Login attempt:", { email, password })
-    setIsLoading(false)
+  //   console.log("[v0] Login attempt:", { email, password })
+  //   setIsLoading(false)
+  // }
+  const formSchema = z.object({
+    username:z.string().min(2,
+      {message:"User name must be not empty"}
+    ).max(50,
+      {message:"User name max 50 char"}),
+    password:z.string().nonempty({
+      message:"Password is required!"
+    })
+  })
+  const router = useRouter();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver:zodResolver(formSchema)
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch
+  } = form
+  const username = watch("username")
+  function onSubmit(data:z.infer<typeof formSchema>){
+    //logic login
+    console.log("Data ", data);
   }
-
   return (
     <Card className="w-full max-w-md border-border">
       <CardHeader className="space-y-1 text-center">
         <div className="mb-4 flex justify-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
-            <svg viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-primary-foreground">
+          {/* <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary"> */}
+            {/* <svg viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-primary-foreground">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
-          </div>
+            </svg> */}
+            <img
+                className="h-30 w-fit"
+                src="avatar.jpg"
+                alt="Column Logo"
+                height="16"
+                width="auto"
+            />
+          {/* </div> */}
         </div>
-        <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
+        <CardTitle className="text-2xl font-bold">Welcome back {username}</CardTitle>
         <CardDescription className="text-muted-foreground">
           Enter your credentials to access your account
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="username">username</Label>
             <Input
-              id="email"
-              type="email"
-              placeholder="name@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              {...register("username")}
+              id="username"
+              type="username"
+              placeholder="username"
+              // value={email}
+              // onChange={(e) => setEmail(e.target.value)}
+              // required
+              className={errors.username && "border-red-500 focus-visible:border-s-orange-600 focus-visible:outline-red-500 focus-visible:border-2 focus-visible:border-red-500"}
               disabled={isLoading}
             />
+            <p className="text-red-500">
+              {errors.username?.message}
+            </p>
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between">
@@ -65,16 +107,25 @@ export function LoginForm() {
               </Link>
             </div>
             <Input
+            {...register("password")}
               id="password"
               type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-              disabled={isLoading}
+              // required
+              // 
+              className={errors.password && "border-red-500 focus-visible:border-s-orange-600 focus-visible:outline-red-500 focus-visible:border-2 focus-visible:border-red-500"}
+            disabled={isLoading}
             />
           </div>
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <p className="text-red-500">
+              {errors.password?.message}
+            </p>
+          <Button 
+          // onClick={() => router.push('/dashboard')}
+            // onClick={login}
+            type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Signing in..." : "Sign in"}
           </Button>
         </form>

@@ -1,5 +1,11 @@
+import { redirect } from "next/navigation";
+
+
 export default function Page(){
-    return(
-        <>Hello</>
-    )
+    const islogin =true;
+    if(!islogin){
+        redirect("/login")
+    }else{
+        redirect("/dashboard/overview")
+    }
 }

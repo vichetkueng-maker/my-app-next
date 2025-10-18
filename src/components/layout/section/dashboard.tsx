@@ -99,6 +99,50 @@ const chartGrid = [
     outcome:""
   }
 ]
+const invoices = [
+  {
+    invoice: "INV001",
+    paymentStatus: "Paid",
+    totalAmount: "$250.00",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV002",
+    paymentStatus: "Pending",
+    totalAmount: "$150.00",
+    paymentMethod: "PayPal",
+  },
+  {
+    invoice: "INV003",
+    paymentStatus: "Unpaid",
+    totalAmount: "$350.00",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV004",
+    paymentStatus: "Paid",
+    totalAmount: "$450.00",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV005",
+    paymentStatus: "Paid",
+    totalAmount: "$550.00",
+    paymentMethod: "PayPal",
+  },
+  {
+    invoice: "INV006",
+    paymentStatus: "Pending",
+    totalAmount: "$200.00",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV007",
+    paymentStatus: "Unpaid",
+    totalAmount: "$300.00",
+    paymentMethod: "Credit Card",
+  },
+]
 export default function Dashboard(){
     return(
         <div className="p-6">
@@ -270,89 +314,22 @@ export default function Dashboard(){
                     <TableHead>Request Path</TableHead>
                     <TableHead>Method</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead>Duration</TableHead>
-                    <TableHead>Timestamp</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell className="font-mono text-sm">/api/users</TableCell>
+                {invoices.map((inv)=>(
+                  <TableRow key={inv.invoice}>
+                    <TableCell className="font-mono text-sm">{inv.paymentMethod}</TableCell>
                     <TableCell>
-                      <Badge variant="outline" className="font-mono">
-                        GET
-                      </Badge>
+                      {inv.paymentStatus}
                     </TableCell>
                     <TableCell>
-                      <Badge className="bg-emerald-500/10 text-emerald-500">200</Badge>
+                      <Badge className="bg-emerald-500/10 text-emerald-500">{inv.totalAmount}</Badge>
                     </TableCell>
-                    <TableCell className="text-muted-foreground">234ms</TableCell>
-                    <TableCell className="text-muted-foreground">2 minutes ago</TableCell>
+                    
                   </TableRow>
-                  <TableRow>
-                    <TableCell className="font-mono text-sm">/api/products</TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className="font-mono">
-                        GET
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge className="bg-emerald-500/10 text-emerald-500">200</Badge>
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">189ms</TableCell>
-                    <TableCell className="text-muted-foreground">5 minutes ago</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-mono text-sm">/api/auth/login</TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className="font-mono">
-                        POST
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge className="bg-emerald-500/10 text-emerald-500">200</Badge>
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">456ms</TableCell>
-                    <TableCell className="text-muted-foreground">8 minutes ago</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-mono text-sm">/api/orders</TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className="font-mono">
-                        GET
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge className="bg-yellow-500/10 text-yellow-500">404</Badge>
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">123ms</TableCell>
-                    <TableCell className="text-muted-foreground">12 minutes ago</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-mono text-sm">/api/analytics</TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className="font-mono">
-                        GET
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge className="bg-emerald-500/10 text-emerald-500">200</Badge>
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">312ms</TableCell>
-                    <TableCell className="text-muted-foreground">15 minutes ago</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-mono text-sm">/api/webhooks</TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className="font-mono">
-                        POST
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge className="bg-red-500/10 text-red-500">500</Badge>
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">892ms</TableCell>
-                    <TableCell className="text-muted-foreground">18 minutes ago</TableCell>
-                  </TableRow>
+                ))}
+                
                 </TableBody>
               </Table>
             </CardContent>
